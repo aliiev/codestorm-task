@@ -130,6 +130,21 @@ body {
   }
 }
 
+.list {
+  font-family: 'Rubik';
+  font-size: 16px;
+  padding-left: 1rem;
+
+  li {
+    margin-bottom: 16px;
+    padding-left: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // PAGES
 .login-page {
   width: 300px;
@@ -151,5 +166,30 @@ body {
 
   .form-check {
     margin-bottom: 24px;
+  }
+}
+
+.list-page {
+  background: $controls-bg;
+  border-radius: 8px;
+  width: 500px;
+  padding: 32px;
+
+  .title {
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+}
+
+// MEDIA QUERIES
+@media(max-width: 600px) {
+  body {
+    margin: 0 16px;
+  }
+
+  .login-page, .list-page {
+    width: 100%;
   }
 }
