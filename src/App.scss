@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat:wght@500&family=Rubik:wght@400;500&display=swap');
 
+// VARIABLES
 $body-bg: #093545;
 $body-color: #ffffff;
 $controls-bg: #224957;
 $primary: #20df7f;
 
+// FUNCTIONS
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// BASE SETUP
 * {
   margin: 0;
   padding: 0;
@@ -15,12 +22,134 @@ body {
   background: url('./images/background.svg') bottom no-repeat;
   background-size: contain;
   background-color: $body-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   font-family: 'Rubik';
   font-size: 16px;
   color: $body-color;
 }
 
-.wrapper {
-  padding: 60px;
+// COMPONENTS
+.form-control {
+  background: $controls-bg;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px 18px;
+  font-family: 'Lexend Deca';
+  font-size: 14px;
+  color: $body-color;
+
+  &::placeholder {
+    color: inherit;
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: 4px shade($controls-bg, 15%) solid;
+  }
+}
+
+.form-check {
+  position: relative;
+  display: flex;
+  padding-left: 25px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover .form-input ~ .form-checkmark {
+    background: shade($controls-bg, 15%);
+  }
+
+  .form-input {
+    position: absolute;
+    display: none;
+    width: 0;
+    height: 0;
+    opacity: none;
+    cursor: pointer;
+
+    &:checked ~ .form-checkmark:after {
+      display: block;
+    }
+  }
+
+  .form-label {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .form-checkmark {
+    position: absolute;
+    background: $controls-bg;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    transition: background .15s ease-in-out;
+
+    &:after {
+      position: absolute;
+      display: none;
+      content: '';
+      width: 4px;
+      height: 8px;
+      border: #ffffff solid;
+      border-width: 0 2px 2px 0;
+      left: 6px;
+      top: 3px;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.btn {
+  background: $primary;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px 18px;
+  font-family: 'Lexend Deca';
+  font-size: 16px;
+  text-align: center;
+  color: $body-color;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  transition: background .15s ease-in-out;
+
+  &:hover {
+    background: shade($primary, 15%);
+  }
+
+  &:focus {
+    outline: 4px shade($primary, 25%) solid;
+  }
+}
+
+// PAGES
+.login-page {
+  width: 300px;
+
+  .title {
+    font-family: 'Lexend Deca';
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  .form-control {
+    margin-bottom: 32px;
+
+    & ~ .form-control {
+      margin-bottom: 24px;
+    }
+  }
+
+  .form-check {
+    margin-bottom: 24px;
+  }
 }
