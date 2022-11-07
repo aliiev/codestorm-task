@@ -3,24 +3,29 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
+import { login, IData } from '../api'
 
 export default function Login() {
-  const [data, setData] = useState<{email: string; password: string}>({
+  const [data, setData] = useState<IData>({
     email: '',
     password: ''
   })
+  const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
   const handleLogin = () => {
-    if (data.email === '' || data.password === '') return
-    axios.post('http://localhost:4000/login', data)
-      .then(res => {
-        console.log('SUCCESS', res)
-        localStorage.setItem('accessToken', res.data.accessToken)
+    if (data.email === '' || data.password === '') {
+      setError('Insert login data')
+      return
+    }
+
+    login(data)
+      .then(accessToken => {
+        localStorage.setItem('accessToken', accessToken)
         navigate('/list')
       })
       .catch(err => {
-        console.log('ERROR', err)
+        setError(err.response.data)
       })
   }
 
@@ -36,6 +41,7 @@ export default function Login() {
       <Checkbox label="Remember me" />
       <button className="btn btn-primary" onClick={handleLogin}>Login</button>
       <button className="btn" onClick={handleRegister}>Register</button>
+      <small className="error-text" style={{opacity: error ? 1 : 0}}>{error}!</small>
     </div>
   )
 }

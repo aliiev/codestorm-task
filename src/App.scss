@@ -179,11 +179,21 @@ body {
   }
 
   .form-check {
-    margin-bottom: 12px;
+    margin-bottom: 24px;
   }
 
   .btn {
-    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .error-text {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    color: $danger;
+    transition: opacity .15s ease-in-out;
   }
 }
 
