@@ -1,4 +1,13 @@
+import { useNavigate } from 'react-router-dom'
+
 export default function List() {
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.removeItem('accessToken')
+    navigate('/')
+  }
+
   return (
     <div className="list-page">
       <h4 className="title">Things to do</h4>
@@ -9,6 +18,7 @@ export default function List() {
         <li>Praesent ac quam massa.</li>
         <li>Praesent nec eros diam. Integer feugiat, erat et vehicula egestas</li>
       </ol>
+      <button className="btn btn-danger" style={{marginTop: '16px'}} onClick={logout}>Logout</button>
     </div>
   )
 }

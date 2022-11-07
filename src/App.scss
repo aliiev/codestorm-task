@@ -5,10 +5,24 @@ $body-bg: #093545;
 $body-color: #ffffff;
 $controls-bg: #224957;
 $primary: #20df7f;
+$danger: #e53935;
 
 // FUNCTIONS
 @function shade($color, $percentage) {
   @return mix(black, $color, $percentage);
+}
+
+// MIXINS
+@mixin btnColor($color) {
+  background: $color;
+
+  &:hover {
+    background: shade($color, 15%);
+  }
+
+  &:focus {
+    outline: 4px shade($color, 25%) solid;
+  }
 }
 
 // BASE SETUP
@@ -108,7 +122,7 @@ body {
 }
 
 .btn {
-  background: $primary;
+  @include btnColor($controls-bg);
   border: none;
   border-radius: 10px;
   width: 100%;
@@ -121,12 +135,12 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
   transition: background .15s ease-in-out;
 
-  &:hover {
-    background: shade($primary, 15%);
+  &.btn-primary {
+    @include btnColor($primary);
   }
 
-  &:focus {
-    outline: 4px shade($primary, 25%) solid;
+  &.btn-danger {
+    @include btnColor($danger);
   }
 }
 
@@ -165,7 +179,11 @@ body {
   }
 
   .form-check {
-    margin-bottom: 24px;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    margin-top: 12px;
   }
 }
 
