@@ -155,6 +155,16 @@ body {
   }
 }
 
+.error-text {
+  display: block;
+  width: 100%;
+  font-weight: 500;
+  font-size: 12px;
+  text-align: center;
+  color: $danger;
+  transition: opacity .15s ease-in-out;
+}
+
 // PAGES
 .login-page {
   width: 300px;
@@ -181,16 +191,6 @@ body {
   .btn {
     margin-bottom: 12px;
   }
-
-  .error-text {
-    display: block;
-    width: 100%;
-    font-weight: 500;
-    font-size: 12px;
-    text-align: center;
-    color: $danger;
-    transition: opacity .15s ease-in-out;
-  }
 }
 
 .list-page {
@@ -206,8 +206,19 @@ body {
     margin-bottom: 16px;
   }
 
+  .list {
+    .list-empty {
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
   & ~ .btn {
     margin-top: 16px;
+    margin-bottom: 12px;
   }
 }
 
