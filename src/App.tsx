@@ -8,11 +8,11 @@ export default function App() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken') !== null) 
+    if (localStorage.getItem('accessToken') !== null || sessionStorage.getItem('accessToken') !== null)
       navigate('/list')
     else
       navigate('/')
-  }, [localStorage])
+  }, [navigate])
 
   return (
     <Routes>

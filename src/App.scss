@@ -138,10 +138,6 @@ body {
   &.btn-primary {
     @include btnColor($primary);
   }
-
-  &.btn-danger {
-    @include btnColor($danger);
-  }
 }
 
 .list {
@@ -208,6 +204,10 @@ body {
     font-weight: 500;
     font-size: 18px;
     margin-bottom: 16px;
+  }
+
+  & ~ .btn {
+    margin-top: 16px;
   }
 }
 
