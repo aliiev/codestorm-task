@@ -15,12 +15,15 @@ export const tasksSlice = createSlice({
     uploadTasks: (state, action: PayloadAction<ITask[]>) => {
       return action.payload
     },
-    addTask: (state, action: PayloadAction<ITask>) => {
+    pushTask: (state, action: PayloadAction<ITask>) => {
       state.push(action.payload)
+    },
+    removeTask: (state, action: PayloadAction<number>) => {
+      return state.filter(item => item.id !== action.payload)
     }
   }
 })
 
-export const { addTask, uploadTasks } = tasksSlice.actions
+export const { uploadTasks, pushTask, removeTask } = tasksSlice.actions
 export const selectTasks = (state: RootState) => state
 export default tasksSlice.reducer

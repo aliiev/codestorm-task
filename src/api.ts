@@ -28,6 +28,21 @@ export async function getTasks(accessToken: string): Promise<ITask[]> {
       Authorization: `Bearer ${accessToken}`
     }
   })
-
   return res.data
+}
+
+export async function addTask(accessToken:string, task: ITask):Promise<ITask> {
+  const res = await axios.post(BASE_URL + '/tasks', task, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+  return res.data
+}
+
+export async function deleteTask(accessToken: string, id: number):Promise<any> {
+  const res = await axios.delete(BASE_URL + '/tasks/' + id, {
+    headers: {Authorization: `Bearer ${accessToken}`}
+  })
+  return res
 }

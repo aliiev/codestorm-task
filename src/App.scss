@@ -145,12 +145,39 @@ body {
   font-size: 16px;
   padding-left: 1rem;
 
-  li {
+  .list-item {
+    position: relative;
+    margin-right: -16px;
     margin-bottom: 16px;
+    padding-right: 16px;
     padding-left: 4px;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    &:hover {
+      & > .btn-delete {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .btn-delete {
+      @include btnColor($danger);
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: none;
+      border-radius: 3px;
+      width: 16px;
+      height: 16px;
+      font-size: 8px;
+      color: $body-color;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .15s ease-in-out;
     }
   }
 }
@@ -194,10 +221,14 @@ body {
 }
 
 .list-page {
-  background: $controls-bg;
-  border-radius: 8px;
   width: 500px;
-  padding: 32px;
+  padding: 16px 0;
+
+  .list-wrapper {
+    background: $controls-bg;
+    border-radius: 8px;
+    padding: 32px;
+  }
 
   .title {
     font-family: 'Rubik';
@@ -216,9 +247,27 @@ body {
     }
   }
 
-  & ~ .btn {
+  .task-form {
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 16px;
-    margin-bottom: 12px;
+
+    * {
+      margin-bottom: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+    }
+
+    .btn.btn-primary {
+      flex: 1;
+    }
+
+    .btn:last-child {
+      width: auto;
+      margin-left: 16px;
+    }
   }
 }
 

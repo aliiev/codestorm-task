@@ -29,8 +29,8 @@ export default function Login() {
   return (
     <div className="login-page">
       <h1 className="title">Welcome</h1>
-      <Input type="text" placeholder="Email" onChange={e => setData({...data, email: e.target.value})} />
-      <Input type="password" placeholder="Password" onChange={e => setData({...data, password: e.target.value})} />
+      <Input type="text" placeholder="Email" value={data.email} onChange={e => setData({...data, email: e.target.value})} />
+      <Input type="password" placeholder="Password" value={data.password} onChange={e => setData({...data, password: e.target.value})} />
       <Checkbox label="Remember me" checked={remember} onChange={() => setRemember(!remember)} />
       <button className="btn btn-primary" onClick={() => auth('login')}>Login</button>
       <button className="btn" onClick={() => auth('register')}>Register</button>
