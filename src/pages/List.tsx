@@ -1,25 +1,29 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getTasks, ITask } from '../api'
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import { uploadTasks } from '../redux/tasksSlice'
+import { getTasks } from '../api'
 
 export default function List() {
-  const [tasks, setTasks] = useState<ITask[]>([])
   const [error, setError] = useState<string>('')
+  const tasks = useAppSelector(state => state.tasks)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
     getTasks(localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || '')
       .then(res_tasks => {
-        setTasks(res_tasks)
+        dispatch(uploadTasks(res_tasks))
       })
       .catch(err => {
         setError(err.response.data)
       })
-  }, []) 
+  }, [dispatch]) 
 
   const logout = () => {
     localStorage.removeItem('accessToken')
     sessionStorage.removeItem('accessToken')
+    dispatch(uploadTasks([]))
     navigate('/')
   }
 
