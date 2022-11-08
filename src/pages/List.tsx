@@ -17,10 +17,9 @@ export default function List() {
     getTasks(token)
       .then(res_tasks => dispatch(uploadTasks(res_tasks)))
       .catch(err => {
-        if (err.response.data === 'jwt expired') logout()
         setError(err.response.data)
       })
-  }, [dispatch]) 
+  }, [dispatch, token]) 
 
   const handleAddTask = () => {
     const taskData = {id: tasks[tasks.length - 1].id + 1, text: task}
