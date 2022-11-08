@@ -45,6 +45,16 @@ body {
   color: $body-color;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+
+  &-thumb {
+    background: shade($controls-bg, 15%);
+    border-radius: 3px;
+    margin: 0 2px;
+  }
+}
+
 // COMPONENTS
 .form-control {
   background: $controls-bg;
@@ -151,6 +161,7 @@ body {
     margin-bottom: 16px;
     padding-right: 16px;
     padding-left: 4px;
+    word-break: break-word;
 
     &:last-child {
       margin-bottom: 0;
@@ -228,6 +239,7 @@ body {
     background: $controls-bg;
     border-radius: 8px;
     padding: 32px;
+    padding-right: 0;
   }
 
   .title {
@@ -238,6 +250,10 @@ body {
   }
 
   .list {
+    max-height: 200px;
+    padding-right: 48px;
+    overflow-y: auto;
+
     .list-empty {
       display: block;
       width: 100%;

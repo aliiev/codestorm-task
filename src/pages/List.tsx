@@ -6,6 +6,7 @@ import { uploadTasks, pushTask, removeTask } from '../redux/tasksSlice'
 import { getTasks, addTask, deleteTask } from '../api'
 
 export default function List() {
+  const token = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || ''
   const [task, setTask] = useState<string>('')
   const [error, setError] = useState<string>('')
   const tasks = useAppSelector(state => state.tasks)
@@ -13,14 +14,16 @@ export default function List() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getTasks(localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || '')
+    getTasks(token)
       .then(res_tasks => dispatch(uploadTasks(res_tasks)))
-      .catch(err => setError(err.response.data))
+      .catch(err => {
+        if (err.response.data === 'jwt expired') logout()
+        setError(err.response.data)
+      })
   }, [dispatch]) 
 
   const handleAddTask = () => {
-    const token = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || ''
-    const taskData = {id: tasks.length + 1, text: task}
+    const taskData = {id: tasks[tasks.length - 1].id + 1, text: task}
 
     addTask(token, taskData)
       .then(task => dispatch(pushTask(task)))
@@ -29,11 +32,13 @@ export default function List() {
   }
 
   const handleDeleteTask = (id: number) => {
-    const token = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') || ''
-    
     deleteTask(token, id)
       .then(() => dispatch(removeTask(id)))
       .catch(err => setError(err.response.statusText))
+  }
+
+  const handleInputEnter = (key: string) => {
+    if (key === 'Enter') handleAddTask()
   }
 
   const logout = () => {
@@ -60,7 +65,7 @@ export default function List() {
         </ol>
       </div>
       <div className="task-form">
-        <Input placeholder="Task text" value={task} onChange={e => setTask(e.target.value)} />
+        <Input placeholder="Task text" value={task} onChange={e => setTask(e.target.value)} onKeyDown={e => handleInputEnter(e.key)} />
         <button className="btn btn-primary" onClick={handleAddTask}>Add task</button>
         <button className="btn" onClick={logout}>Logout</button>
       </div>
