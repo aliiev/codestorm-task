@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url('../images/background.svg') bottom no-repeat;
+  background-size: contain;
+  background-color: $body-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Rubik';
+  font-size: 16px;
+  color: $body-color;
+}
+

@@ -1,0 +1,29 @@
+// VARIABLES
+$body-bg: #093545;
+$body-color: #ffffff;
+$controls-bg: #224957;
+$primary: #20df7f;
+$danger: #e53935;
+
+// FUNCTIONS
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// MIXINS
+@mixin btnColor($color) {
+  background: $color;
+
+  &:hover {
+    background: shade($color, 15%);
+  }
+
+  &:disabled {
+    background: shade($color, 25%);
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: 4px shade($color, 25%) solid;
+  }
+}

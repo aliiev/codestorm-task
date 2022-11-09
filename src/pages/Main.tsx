@@ -25,22 +25,26 @@ export default function Main() {
   }, [dispatch, token]) 
 
   const handleAddTask = () => {
-    if (task !== '') {
-      const taskData = {id: tasks[tasks.length - 1].id + 1, text: task}
-
-      setLoading(true)
-      setError('')
-
-      addTask(token, taskData)
-        .then(task => dispatch(pushTask(task)))
-        .catch(err => setError(err.response.statusText))
-        .then(() => {
-          setTask('')
-          setLoading(false)
-        })
-    } else {
+    if (task === '') {
       setError('Insert task text')
+      return
     }
+
+    const taskData = {
+      id: tasks[tasks.length - 1].id + 1, 
+      text: task
+    }
+
+    setLoading(true)
+    setError('')
+
+    addTask(token, taskData)
+      .then(task => dispatch(pushTask(task)))
+      .catch(err => setError(err.response.statusText))
+      .then(() => {
+        setTask('')
+        setLoading(false)
+      })
   }
 
   const handleDeleteTask = (id: number) => {

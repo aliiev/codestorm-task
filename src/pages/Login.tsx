@@ -6,10 +6,7 @@ import Button from '../components/Button'
 import { login, register, IData } from '../api'
 
 export default function Login() {
-  const [data, setData] = useState<IData>({
-    email: '',
-    password: ''
-  })
+  const [data, setData] = useState<IData>({email: '', password: ''})
   const [remember, setRemember] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
@@ -25,9 +22,7 @@ export default function Login() {
       storage.setItem('accessToken', accessToken)
       navigate('/main')
     })
-    .catch(err => {
-      setError(err.response.data)
-    })
+    .catch(err => setError(err.response.data))
     .then(() => setLoading(false))
   }
 

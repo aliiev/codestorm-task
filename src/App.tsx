@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Login from './pages/Login'
 import Main from './pages/Main'
-import './App.scss'
 
 export default function App() {
   const navigate = useNavigate()

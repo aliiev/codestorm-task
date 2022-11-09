@@ -1,0 +1,77 @@
+.login-page {
+  width: 300px;
+
+  .title {
+    font-family: 'Lexend Deca';
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  .form-control {
+    margin-bottom: 32px;
+
+    & ~ .form-control {
+      margin-bottom: 24px;
+    }
+  }
+
+  .form-check {
+    margin-bottom: 24px;
+  }
+
+  .btn {
+    margin-bottom: 12px;
+  }
+}
+
+.list-page {
+  width: 500px;
+  padding: 16px 0;
+
+  .list-wrapper {
+    background: $controls-bg;
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .title {
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .list {
+    .list-empty {
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
+  .task-form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 16px;
+
+    * {
+      margin-bottom: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+    }
+
+    .btn.btn-primary {
+      flex: 1;
+    }
+
+    .btn:last-child {
+      width: auto;
+      margin-left: 16px;
+    }
+  }
+}
