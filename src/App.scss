@@ -20,6 +20,11 @@ $danger: #e53935;
     background: shade($color, 15%);
   }
 
+  &:disabled {
+    background: shade($color, 25%);
+    cursor: not-allowed;
+  }
+
   &:focus {
     outline: 4px shade($color, 25%) solid;
   }
@@ -73,6 +78,11 @@ body {
 
   &:focus {
     outline: 4px shade($controls-bg, 15%) solid;
+  }
+
+  &:disabled {
+    background: shade($controls-bg, 15%);
+    cursor: not-allowed;
   }
 }
 
@@ -191,16 +201,25 @@ body {
       transition: opacity .15s ease-in-out;
     }
   }
+
+  .list-message {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
-.error-text {
+.text-helper {
   display: block;
   width: 100%;
-  font-weight: 500;
+  height: 12px;
   font-size: 12px;
   text-align: center;
-  color: $danger;
   transition: opacity .15s ease-in-out;
+
+  .text-error {
+    color: $danger;
+  }
 }
 
 // PAGES
@@ -239,7 +258,6 @@ body {
     background: $controls-bg;
     border-radius: 8px;
     padding: 32px;
-    padding-right: 0;
   }
 
   .title {
@@ -250,10 +268,6 @@ body {
   }
 
   .list {
-    max-height: 200px;
-    padding-right: 48px;
-    overflow-y: auto;
-
     .list-empty {
       display: block;
       width: 100%;

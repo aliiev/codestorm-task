@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
+import Button from '../components/Button'
 import { login, register, IData } from '../api'
 
 export default function Login() {
@@ -10,20 +11,24 @@ export default function Login() {
     password: ''
   })
   const [remember, setRemember] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
   const auth = (method: string) => {
     const authorize:Promise<string> = method === 'login' ? login(data) : register(data)
-  
+    setLoading(true)
+    setError('')
+
     authorize.then(accessToken => {
       const storage:Storage = remember ? localStorage : sessionStorage
       storage.setItem('accessToken', accessToken)
-      navigate('/list')
+      navigate('/main')
     })
     .catch(err => {
       setError(err.response.data)
     })
+    .then(() => setLoading(false))
   }
 
   return (
@@ -32,9 +37,12 @@ export default function Login() {
       <Input type="text" placeholder="Email" value={data.email} onChange={e => setData({...data, email: e.target.value})} />
       <Input type="password" placeholder="Password" value={data.password} onChange={e => setData({...data, password: e.target.value})} />
       <Checkbox label="Remember me" checked={remember} onChange={() => setRemember(!remember)} />
-      <button className="btn btn-primary" onClick={() => auth('login')}>Login</button>
-      <button className="btn" onClick={() => auth('register')}>Register</button>
-      <small className="error-text" style={{opacity: error ? 1 : 0}}>{error}!</small>
+      <Button title="Login" color="primary" disabled={loading} onClick={() => auth('login')} />
+      <Button title="Register" disabled={loading} onClick={() => auth('register')} />
+      <small className="text-helper" style={{opacity: loading || error ? 1 : 0}}>
+        {loading && 'Loading...'}
+        {error && <span className="text-error">{error}</span>}
+      </small>
     </div>
   )
 }

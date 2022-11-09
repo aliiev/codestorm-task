@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Login from './pages/Login'
-import List from './pages/List'
+import Main from './pages/Main'
 import './App.scss'
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
 
   useEffect(() => {
     if (localStorage.getItem('accessToken') !== null || sessionStorage.getItem('accessToken') !== null)
-      navigate('/list')
+      navigate('/main')
     else
       navigate('/')
   }, [navigate])
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/list" element={<List />} />
+      <Route path="/main" element={<Main />} />
     </Routes>
   )
 }
